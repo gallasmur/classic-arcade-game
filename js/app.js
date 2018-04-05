@@ -17,7 +17,7 @@ class Enemy extends Entity {
     }
 
     update(dt) {
-        
+        this.posX = (this.posX + this.speed) * dt;
     }
 }
 
