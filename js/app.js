@@ -1,8 +1,7 @@
 class Entity {
-    constructor(posX, posY, speed) {
+    constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
-        this.speed = speed;
     }
 
     render() {
@@ -12,7 +11,8 @@ class Entity {
 
 class Enemy extends Entity {
     constructor(posX, posY, speed) {
-        super(posX, posY, speed);
+        super(posX, posY);
+        this.speed = speed;
         this.sprite = 'images/enemy-bug.png';
     }
 
@@ -22,8 +22,8 @@ class Enemy extends Entity {
 }
 
 class Player extends Entity {
-    constructor(posX, posY, speed) {
-        super(posX, posY, speed);
+    constructor(posX, posY) {
+        super(posX, posY);
         this.sprite = "images/char-boy.png";
     }
 
@@ -67,7 +67,12 @@ class Player extends Entity {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+let allEnemies = [];
+for (let i = 0; i < 6; i++) {
+    const enemy = new Enemy(-30, 200, 10);
+    allEnemies.push(enemy);
+}
+const player = new Player(200, 100);
 
 
 // This listens for key presses and sends the keys to your
