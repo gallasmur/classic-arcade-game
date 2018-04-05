@@ -1,3 +1,26 @@
+class Entity {
+    constructor(posX, posY, speed) {
+        this.posX = posX;
+        this.posY = posY;
+        this.speed = speed;
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.posX, this.posY);
+    }
+}
+
+class Enemy extends Entity {
+    constructor(posX, posY, speed) {
+        super(posX, posY, speed);
+        this.sprite = 'images/enemy-bug.png';
+    }
+
+    update(dt) {
+        
+    }
+}
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
