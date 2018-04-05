@@ -35,17 +35,34 @@ class Enemy extends Entity {
 }
 
 class Player extends Entity {
-    constructor(posX, posY) {
-        super(posX, posY);
+    constructor() {
+        super(200, 320);
         this.sprite = "images/char-boy.png";
+        this.changeX = 0;
+        this.changeY = 0;
     }
 
     update() {
-
+        this.posX += this.changeX;
+        this.posY += this.changeY;
+        this.changeX = 0;
+        this.changeY = 0;
     }
 
-    handleInput() {
-
+    handleInput(key) {
+        switch(key) {
+            case 'left':
+                this.changeX = -100;
+                break;
+            case 'up':
+                this.changeY = -80;
+                break;
+            case 'right':
+                this.changeX = 100;
+                break;
+            case 'down':
+                this.changeY = 80;
+        }
     }
 }
 
@@ -86,7 +103,7 @@ enemy3 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
 enemy4 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
 let allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
-const player = new Player(200, 100);
+const player = new Player();
 
 
 // This listens for key presses and sends the keys to your
