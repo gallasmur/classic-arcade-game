@@ -17,7 +17,8 @@ class Enemy extends Entity {
     }
 
     update(dt) {
-        this.posX = (this.posX + this.speed) * dt;
+        this.posX = this.posX + (this.speed * dt);
+        console.log(this.posX);
     }
 }
 
@@ -67,11 +68,12 @@ class Player extends Entity {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies = [];
-for (let i = 0; i < 6; i++) {
-    const enemy = new Enemy(-30, 200, 10);
-    allEnemies.push(enemy);
-}
+enemy1 = new Enemy(-30, 100, 100);
+enemy2 = new Enemy(-60, 200, 100);
+enemy3 = new Enemy(-60, 100, 100);
+enemy4 = new Enemy(-90, 200, 100);
+let allEnemies = [enemy1, enemy2, enemy3, enemy4];
+
 const player = new Player(200, 100);
 
 
