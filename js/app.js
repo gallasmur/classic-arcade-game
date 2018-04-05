@@ -47,6 +47,19 @@ class Player extends Entity {
         this.posY += this.changeY;
         this.changeX = 0;
         this.changeY = 0;
+
+        //check if player reach the water of want to go out of bounds
+        if(this.posY < 80) {
+            //Player reach the water and score, go to initial position
+            this.posX = 200;
+            this.posY = 320;
+        } else if (this.posY > 400) {
+            this.posY -= 80;
+        } else if (this.posX < 0) {
+            this.posX += 100;
+        } else if (this.posX > 400) {
+            this.posX -= 100;
+        }
     }
 
     handleInput(key) {
