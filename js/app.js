@@ -12,10 +12,10 @@ class Entity {
 }
 
 class Enemy extends Entity {
-    constructor(posX, posY, speed) {
+    constructor(posX, posY, speed, sprite) {
         super(posX, posY);
         this.speed = speed;
-        this.sprite = 'images/enemy-bug.png';
+        this.sprite = sprite;
     }
 
     update(dt) {
@@ -57,7 +57,15 @@ class Enemy extends Entity {
         });
         return isCollision;
     }
+    static incrementDifficulty5() {
+        for (let i = 0; i < 2; i++) {
+            createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 200, 'images/ant.png'));
+        }
+    }
 
+    static incrementDifficulty8() {
+        createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 300, 'images/bee.png'));
+    }
 }
 
 class Player extends Entity {
@@ -115,7 +123,12 @@ class Player extends Entity {
     updateScore() {
         this.score++;
         document.querySelector('.scoreData').textContent = this.score;
-        if (this.score === 5) {
+        if(this.score === 5) {
+            Enemy.incrementDifficulty5();
+            //showStar();
+        } else if(this.score === 8) {
+            Enemy.incrementDifficulty8();
+        } else if (this.score === 10) {
             //Won game!!!
         }
     }
@@ -165,8 +178,8 @@ class Player extends Entity {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-for(let i = 0; i < 4; i++) {
-    createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 100));
+for(let i = 0; i < 3; i++) {
+    createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 150, 'images/enemy-bug.png'));
 }
 
 
