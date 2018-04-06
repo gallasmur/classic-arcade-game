@@ -2,6 +2,8 @@ class Entity {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
+        this.width = 80;
+        this.height = 80;
     }
 
     render() {
@@ -19,27 +21,52 @@ class Enemy extends Entity {
     update(dt) {
         this.posX = this.posX + (this.speed * dt);
 
+        if (Enemy.checkCollisions(player)) {
+            //player lose, and we return them to the inicio
+            player.returnToStart();
+        }
+
         if (this.posX > 550) {
+            //get enemy to the start
             this.posX = Enemy.randomX();
             this.posY = Enemy.randomY();
+            createEnemy(this);
         }
     }
 
     static randomX() {
-        return Math.random() * (-400);
+        return Math.random() * (-500);
     }
 
     static randomY() {
-        return 60 + (80 * Math.floor(Math.random() * 3));
+        return 125 + (83 * Math.floor(Math.random() * 3));
     }
+
+    static checkCollisions(target) {
+        let isCollision = false;
+        let index = allEnemies.indexOf(target);
+        
+        allEnemies.forEach(function (enemy) {
+            if (index == -1 && enemy.posX < target.posX + target.width &&
+                enemy.posX + enemy.width > target.posX &&
+                enemy.posY < target.posY + target.height &&
+                enemy.height + enemy.posY > target.posY) {
+                isCollision = true;
+            }
+        });
+        return isCollision;
+    }
+
 }
 
 class Player extends Entity {
     constructor() {
-        super(200, 320);
+        super(202, 375);
         this.sprite = "images/char-boy.png";
         this.changeX = 0;
         this.changeY = 0;
+        this.score = 0;
+        this.lives = 0;
     }
 
     update() {
@@ -51,31 +78,40 @@ class Player extends Entity {
         //check if player reach the water of want to go out of bounds
         if(this.posY < 80) {
             //Player reach the water and score, go to initial position
-            this.posX = 200;
-            this.posY = 320;
-        } else if (this.posY > 400) {
+            this.returnToStart();
+        } else if (this.posY > 500) {
             this.posY -= 80;
         } else if (this.posX < 0) {
             this.posX += 100;
-        } else if (this.posX > 400) {
+        } else if (this.posX > 500) {
             this.posX -= 100;
         }
+    }
+
+    returnToStart() {
+        this.posX = 202;
+        this.posY = 375;
+        console.log("Hola colision");
     }
 
     handleInput(key) {
         switch(key) {
             case 'left':
-                this.changeX = -100;
+                this.changeX = -101;
                 break;
             case 'up':
-                this.changeY = -80;
+                this.changeY = -83;
                 break;
             case 'right':
-                this.changeX = 100;
+                this.changeX = 101;
                 break;
             case 'down':
-                this.changeY = 80;
+                this.changeY = 83;
         }
+    }
+
+    updateScore() {
+        
     }
 }
 
@@ -110,13 +146,24 @@ class Player extends Entity {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-enemy1 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
-enemy2 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
-enemy3 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
-enemy4 = new Enemy(Enemy.randomX(), Enemy.randomY(), 100);
-let allEnemies = [enemy1, enemy2, enemy3, enemy4];
+let allEnemies = [];
+for(let i = 0; i < 4; i++) {
+    createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 100));
+}
+
 
 const player = new Player();
+
+function createEnemy(enemy) {
+
+    while(Enemy.checkCollisions(enemy)) {
+        enemy.posX = Enemy.randomX();
+        enemy.posY = Enemy.randomY();
+    }
+    if(allEnemies.indexOf(enemy) == -1) {
+        allEnemies.push(enemy);
+    }
+}
 
 
 // This listens for key presses and sends the keys to your
@@ -131,3 +178,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+

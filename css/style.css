@@ -1,3 +1,21 @@
 body {
     text-align: center;
 }
+
+header {
+    width: 603px;
+    margin: 0  auto;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: -50px;
+}
+
+.scoreData {
+    font-size: 60px;
+    margin-top: -10px;
+}
+
+.stars {
+    color: #aeb529;
+}
