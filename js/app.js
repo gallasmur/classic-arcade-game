@@ -143,6 +143,7 @@ class Player extends Entity {
         } else if (this.lives === 0) {
             document.querySelector('.firstStar').style.color = '#ddddd9';
             //lost game!!
+            document.querySelector('.loseScreen').style.display = 'flex';
         }
     }
 
@@ -237,9 +238,14 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-document.querySelector('.replay').addEventListener('click', function() {
+document.querySelector('.winButton').addEventListener('click', function() {
     innit();
     document.querySelector('.winScreen').style.display = 'none';
+});
+
+document.querySelector('.loseButton').addEventListener('click', function () {
+    innit();
+    document.querySelector('.loseScreen').style.display = 'none';
 });
 
 

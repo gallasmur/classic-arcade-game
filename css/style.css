@@ -44,3 +44,20 @@ header {
     background-color: #aeb529;
     cursor: pointer;
 }
+
+.loseScreen {
+    display: none;
+    position: absolute;
+    top: 200px;
+    width: 100%;
+    height: 600px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.loseScreen p {
+    font-size: 60px;
+}
