@@ -24,6 +24,7 @@ class Enemy extends Entity {
         if (Enemy.checkCollisions(player)) {
             //player lose, and we return them to the inicio
             player.returnToStart();
+            player.updateLives();
         }
 
         if (this.posX > 550) {
@@ -113,10 +114,22 @@ class Player extends Entity {
 
     updateScore() {
         this.score++;
+        document.querySelector('.scoreData').textContent = this.score;
         if (this.score === 5) {
             //Won game!!!
         }
-        document.querySelector('.scoreData').textContent = this.score;
+    }
+
+    updateLives() {
+        this.lives--;
+        if (this.lives === 2) {
+            document.querySelector('.thirdStar').style.color = '#ddddd9';
+        } else if (this.lives === 1) {
+            document.querySelector('.secondStar').style.color = '#ddddd9';
+        } else if (this.lives === 0) {
+            document.querySelector('.firstStar').style.color = '#ddddd9';
+            //lost game!!
+        }
     }
 }
 
