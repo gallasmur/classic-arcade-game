@@ -66,7 +66,7 @@ class Player extends Entity {
         this.changeX = 0;
         this.changeY = 0;
         this.score = 0;
-        this.lives = 0;
+        this.lives = 3;
     }
 
     update() {
@@ -79,6 +79,7 @@ class Player extends Entity {
         if(this.posY < 80) {
             //Player reach the water and score, go to initial position
             this.returnToStart();
+            this.updateScore();
         } else if (this.posY > 500) {
             this.posY -= 80;
         } else if (this.posX < 0) {
@@ -111,7 +112,11 @@ class Player extends Entity {
     }
 
     updateScore() {
-        
+        this.score++;
+        if (this.score === 5) {
+            //Won game!!!
+        }
+        document.querySelector('.scoreData').textContent = this.score;
     }
 }
 
