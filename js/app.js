@@ -130,6 +130,7 @@ class Player extends Entity {
             Enemy.incrementDifficulty8();
         } else if (this.score === 10) {
             //Won game!!!
+            document.querySelector('.winScreen').style.display = 'flex';
         }
     }
 
@@ -143,6 +144,16 @@ class Player extends Entity {
             document.querySelector('.firstStar').style.color = '#ddddd9';
             //lost game!!
         }
+    }
+
+    restoreLivesAndScore(restore) {
+        if(restore === 3) {
+            document.querySelector('.scoreData').textContent = this.score;
+            document.querySelector('.firstStar').style.color = '#aeb529';
+            document.querySelector('.secondStar').style.color = '#aeb529';
+            document.querySelector('.thirdStar').style.color = '#aeb529';
+        }
+
     }
 }
 
@@ -178,12 +189,28 @@ class Player extends Entity {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-for(let i = 0; i < 3; i++) {
-    createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 150, 'images/enemy-bug.png'));
+let player;
+
+function innit() {
+    if (allEnemies.length != 0) {
+        allEnemies = [];
+        //We let garbage collections to delete past enemies
+    }
+    if (player) {
+        player.posX = 202;
+        player.posY = 375;
+        player.score = 0;
+        player.lives = 3;
+        player.restoreLivesAndScore(3);
+    } else {
+        player = new Player();
+    }
+    for (let i = 0; i < 3; i++) {
+        createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 150, 'images/enemy-bug.png'));
+    }
 }
 
-
-const player = new Player();
+innit();
 
 function createEnemy(enemy) {
 
@@ -208,6 +235,11 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+});
+
+document.querySelector('.replay').addEventListener('click', function() {
+    innit();
+    document.querySelector('.winScreen').style.display = 'none';
 });
 
 
