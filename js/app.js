@@ -122,7 +122,7 @@ class Player extends Entity {
 
     updateScore() {
         this.score++;
-        document.querySelector('.scoreData').textContent = this.score;
+        UI.scoreData.textContent = this.score;
         if(this.score === 5) {
             Enemy.incrementDifficulty5();
             //showStar();
@@ -130,32 +130,54 @@ class Player extends Entity {
             Enemy.incrementDifficulty8();
         } else if (this.score === 10) {
             //Won game!!!
-            document.querySelector('.winScreen').style.display = 'flex';
+            UI.winScreen.style.display = 'flex';
         }
     }
 
     updateLives() {
+        console.log(this.lives);
         this.lives--;
         if (this.lives === 2) {
-            document.querySelector('.thirdStar').style.color = '#ddddd9';
+            UI.stars.lastElementChild.style.color = '#ddddd9';
+            console.log(UI.thirdStar);
         } else if (this.lives === 1) {
-            document.querySelector('.secondStar').style.color = '#ddddd9';
+            
+            UI.stars.firstElementChild.nextElementSibling.style.color = '#ddddd9';
+            console.log(UI.secondStarColor);
         } else if (this.lives === 0) {
-            document.querySelector('.firstStar').style.color = '#ddddd9';
+            UI.stars.firstElementChild.style.color = '#ddddd9';
             //lost game!!
-            document.querySelector('.loseScreen').style.display = 'flex';
+            UI.loseScreen.style.display = 'flex';
         }
     }
 
     restoreLivesAndScore(restore) {
         if(restore === 3) {
-            document.querySelector('.scoreData').textContent = this.score;
-            document.querySelector('.firstStar').style.color = '#aeb529';
-            document.querySelector('.secondStar').style.color = '#aeb529';
-            document.querySelector('.thirdStar').style.color = '#aeb529';
+            UI.scoreData.textContent = this.score;
+            UI.stars.firstElementChild.style.color = '#aeb529';
+            UI.stars.firstElementChild.nextElementSibling.style.color = '#aeb529';
+            UI.stars.lastElementChild.style.color = '#aeb529';
         }
 
     }
+}
+
+class Star extends Entity {
+    constructor() {
+        super(-999, -999);
+        this.sprite = "images/Star.png";
+        this.changeX = 0;
+        this.changeY = 0;
+        this.score = 0;
+        this.lives = 3;
+    }
+}
+
+const UI = {
+    scoreData: document.querySelector('.scoreData'),
+    winScreen: document.querySelector('.winScreen'),
+    loseScreen: document.querySelector('.loseScreen'),
+    stars : document.querySelector('.stars')
 }
 
 // // Enemies our player must avoid
@@ -240,12 +262,12 @@ document.addEventListener('keyup', function(e) {
 
 document.querySelector('.winButton').addEventListener('click', function() {
     innit();
-    document.querySelector('.winScreen').style.display = 'none';
+    UI.winScreen.style.display = 'none';
 });
 
 document.querySelector('.loseButton').addEventListener('click', function () {
     innit();
-    document.querySelector('.loseScreen').style.display = 'none';
+    UI.loseScreen.style.display = 'none';
 });
 
 
