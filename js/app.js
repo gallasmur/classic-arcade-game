@@ -166,10 +166,15 @@ class Star extends Entity {
     constructor() {
         super(-999, -999);
         this.sprite = "images/Star.png";
-        this.changeX = 0;
-        this.changeY = 0;
-        this.score = 0;
-        this.lives = 3;
+        
+    }
+
+    show() {
+
+    }
+
+    hide() {
+        
     }
 }
 

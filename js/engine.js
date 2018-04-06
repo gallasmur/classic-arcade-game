@@ -94,6 +94,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        star.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -177,7 +178,8 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/ant.png',
-        'images/bee.png'
+        'images/bee.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 
