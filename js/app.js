@@ -36,7 +36,9 @@ class Enemy extends Entity {
     }
 
     static randomX() {
-        return Math.random() * (-500);
+        //return Math.random() * (-500);
+        const x = 101 * Math.floor(Math.random() * 5);
+        return -x;
     }
 
     static randomY() {
@@ -125,7 +127,7 @@ class Player extends Entity {
         UI.scoreData.textContent = this.score;
         if(this.score === 5) {
             Enemy.incrementDifficulty5();
-            //showStar();
+            star.show();
         } else if(this.score === 8) {
             Enemy.incrementDifficulty8();
         } else if (this.score === 10) {
@@ -157,6 +159,15 @@ class Player extends Entity {
             UI.stars.firstElementChild.style.color = '#aeb529';
             UI.stars.firstElementChild.nextElementSibling.style.color = '#aeb529';
             UI.stars.lastElementChild.style.color = '#aeb529';
+        } else if (restore === 1) {
+            this.lives++;
+            if (this.lives === 4) {
+                this.lives = 3;
+            } else if (this.lives === 3) {
+                UI.stars.lastElementChild.style.color = '#aeb529';
+            } else if (this.lives === 2) {
+                UI.stars.firstElementChild.nextElementSibling.style.color = '#aeb529';
+            }
         }
 
     }
@@ -166,15 +177,33 @@ class Star extends Entity {
     constructor() {
         super(-999, -999);
         this.sprite = "images/Star.png";
-        
+    }
+
+    update() {
+        if (this.checkCollisionWithPlayer()) {
+            this.hide();
+
+            player.restoreLivesAndScore(1);
+        }
     }
 
     show() {
-
+        this.posX = - Enemy.randomX();
+        this.posY = Enemy.randomY();
     }
 
     hide() {
-        
+        this.posX = -999;
+        this.posY = -999;
+    }
+
+    checkCollisionWithPlayer() {
+        if (this.posX < player.posX + player.width &&
+            this.posX + this.width > player.posX &&
+            this.posY < player.posY + player.height &&
+            this.height + this.posY > player.posY) {
+            return true;
+        }
     }
 }
 
@@ -218,6 +247,7 @@ const UI = {
 // Place the player object in a variable called player
 let allEnemies = [];
 let player;
+let star;
 
 function innit() {
     if (allEnemies.length != 0) {
@@ -233,6 +263,7 @@ function innit() {
     } else {
         player = new Player();
     }
+    star = new Star();
     for (let i = 0; i < 3; i++) {
         createEnemy(new Enemy(Enemy.randomX(), Enemy.randomY(), 150, 'images/enemy-bug.png'));
     }
