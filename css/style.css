@@ -61,3 +61,18 @@ header {
 .loseScreen p {
     font-size: 60px;
 }
+
+.secondsStar {
+    position: absolute;
+    top: 310px;
+    width: 100%;
+
+    display: none;
+    justify-content: center;
+}
+
+.secondsStar p {
+    padding-right: 10px;
+    font-size: 60px;
+    color: red;
+}

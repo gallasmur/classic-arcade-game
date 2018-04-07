@@ -130,6 +130,7 @@ class Player extends Entity {
             star.show();
         } else if(this.score === 8) {
             Enemy.incrementDifficulty8();
+            star.show();
         } else if (this.score === 10) {
             //Won game!!!
             UI.winScreen.style.display = 'flex';
@@ -177,6 +178,8 @@ class Star extends Entity {
     constructor() {
         super(-999, -999);
         this.sprite = "images/Star.png";
+        this.myTimer;
+        this.seconds = 5;
     }
 
     update() {
@@ -190,11 +193,20 @@ class Star extends Entity {
     show() {
         this.posX = - Enemy.randomX();
         this.posY = Enemy.randomY();
+
+        this.seconds = 5;
+        UI.secondsStar.innerHTML = '<p>' + star.getFormattedSeconds() + '</p>';
+        this.startTimer();
+
+        UI.secondsStar.style.display = 'flex';
     }
 
     hide() {
         this.posX = -999;
         this.posY = -999;
+
+        this.stopTimer();
+        UI.secondsStar.style.display = 'none';
     }
 
     checkCollisionWithPlayer() {
@@ -205,13 +217,43 @@ class Star extends Entity {
             return true;
         }
     }
+
+    startTimer() {
+        this.myTimer = setInterval(timer, 1000);
+    }
+
+    stopTimer() {
+        window.clearInterval(this.myTimer);
+    }
+
+    /**
+    * Return a string of two digit seconds
+    */
+    getFormattedSeconds() {
+
+        return ("0" + this.seconds).slice(-2);
+    }
+
+}
+
+/**
+    * Function that is call every 1 second and updates the UI
+    */
+function timer() {
+    star.seconds--;
+    UI.secondsStar.innerHTML = '<p>' + star.getFormattedSeconds() +'</p>';
+
+    if (star.seconds === 0) {
+        star.hide();
+    }
 }
 
 const UI = {
     scoreData: document.querySelector('.scoreData'),
     winScreen: document.querySelector('.winScreen'),
     loseScreen: document.querySelector('.loseScreen'),
-    stars : document.querySelector('.stars')
+    stars : document.querySelector('.stars'),
+    secondsStar: document.querySelector('.secondsStar')
 }
 
 // // Enemies our player must avoid
