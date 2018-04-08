@@ -76,3 +76,40 @@ header {
     font-size: 60px;
     color: red;
 }
+
+.main {
+  font-family:Arial;
+  width:500px;
+  display:block;
+  margin:0 auto;
+}
+
+.character {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background: white;
+}
+
+.character h1 {
+    font-size: 60px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.character p {
+    font-size: 36px;
+}
+
+.character .go {
+    font-size: 24px;
+    padding: 10px 30px;
+    background-color: forestgreen;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
+}

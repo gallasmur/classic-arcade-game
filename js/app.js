@@ -1,3 +1,33 @@
+//Mover estas funciones a su propia file slider.js....
+$(document).ready(function() {
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+    });
+    $('.slick-slide:first').focus();
+});
+
+let currentCharSelected = "";
+$('.main').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+    currentCharSelected = $('.slick-slide.slick-current.slick-active').attr('id');
+});
+
+$('.go').click(function() {
+    $('.character').css('display', 'none');
+    player.changeSprite(currentCharSelected);
+})
+
 class Entity {
     constructor(posX, posY) {
         this.posX = posX;
@@ -98,6 +128,27 @@ class Player extends Entity {
         } else if (this.posX > 500) {
             this.posX -= 100;
         }
+    }
+
+    changeSprite(sprite) {
+        switch (sprite) {
+            case 'catGirl':
+                this.sprite = 'images/char-cat-girl.png';
+                break;
+            case 'hornGirl':
+                this.sprite = 'images/char-horn-girl.png';
+                break;
+            case 'pinkGirl':
+                this.sprite = 'images/char-pink-girl.png';
+                break;
+            case 'princessGirl':
+                this.sprite = 'images/char-princess-girl.png';
+                break;
+            default:
+                this.sprite = 'images/char-boy.png';
+                break;
+        }
+        console.log(this.sprite);
     }
 
     returnToStart() {
