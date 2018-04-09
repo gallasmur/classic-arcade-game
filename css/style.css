@@ -1,5 +1,7 @@
 body {
     text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: #424242;
 }
 
 header {
@@ -85,7 +87,7 @@ header {
 }
 
 .character {
-    width: 100%;
+    width: 95%;
     position: absolute;
     top: 0;
     background: white;
@@ -99,6 +101,7 @@ header {
 
 .character p {
     font-size: 36px;
+    font-style: italic;
 }
 
 .character .go {

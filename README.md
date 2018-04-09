@@ -1,6 +1,32 @@
-frontend-nanodegree-arcade-game
-===============================
+# Classic Arcade Game Clone
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Table of Contents
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+* [Instructions](#instructions)
+* [Build With](#buildwith)
+* [Author](#author)
+
+## Instructions
+
+The game starts with a screen where the player can choose the image he want to play the game with. And a little
+instruction is given to him, go for the starts, given that if he collects one during the game he will restore one
+live.
+
+To win the game the player will need to reach the water 10 times and he have 3 lives to start with.
+The level of difficulty increase in levels 5 and 8.
+
+In level 5 two enemies are added, this enemies are a little faster.
+In level 8 one enemy quite faster is added.
+
+In this two levels a star show in the board, the player has 5 seconds to collect it.
+
+## Build With
+
+* Font Awesome 5 - https://fontawesome.com/icons
+* Google Fonts - https://fonts.google.com/
+* Slick Slider - http://kenwheeler.github.io/slick/
+
+
+## Author
+
+* Jose Antonio Rabal Segura
