@@ -2,6 +2,11 @@ body {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     color: #424242;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 header {
@@ -23,10 +28,10 @@ header {
 }
 
 .winScreen {
-    display: none;
+    display: flex;
     position: absolute;
     top: 200px;
-    width: 100%;
+    width: 99%;
     height: 600px;
 
     flex-direction: column;
@@ -48,10 +53,10 @@ header {
 }
 
 .loseScreen {
-    display: none;
+    display: flex;
     position: absolute;
     top: 200px;
-    width: 100%;
+    width: 99%;
     height: 600px;
 
     flex-direction: column;
@@ -115,4 +120,10 @@ header {
 
 *:focus {
     outline: none;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
 }

@@ -7,7 +7,8 @@ const UI = {
     winScreen: document.querySelector('.winScreen'),
     loseScreen: document.querySelector('.loseScreen'),
     stars: document.querySelector('.stars'),
-    secondsStar: document.querySelector('.secondsStar')
+    secondsStar: document.querySelector('.secondsStar'),
+    body : document.querySelector('body')
 }
 
 /**
@@ -203,6 +204,13 @@ class Player extends Entity {
      */
     updateScore() {
         this.score++;
+
+        //little background animation when score
+        window.setTimeout(function() {
+            UI.body.style.backgroundColor = 'white';
+        }, 200);
+        UI.body.style.backgroundColor = '#91f788';
+
         UI.scoreData.textContent = this.score;
         if(this.score === 5) {
             Enemy.incrementDifficulty5();
@@ -212,7 +220,10 @@ class Player extends Entity {
             star.show();
         } else if (this.score === 10) {
             //Won game!!!
-            UI.winScreen.style.display = 'flex';
+            window.setTimeout(function () {
+                UI.body.style.backgroundColor = '#91f788';
+            }, 200);
+            UI.winScreen.classList.remove('hidden');
         }
     }
 
@@ -221,6 +232,11 @@ class Player extends Entity {
      */
     updateLives() {
         this.lives--;
+        window.setTimeout(function () {
+            UI.body.style.backgroundColor = 'white';
+        }, 200);
+        UI.body.style.backgroundColor = '#9b012d';
+
         if (this.lives === 2) {
             UI.stars.lastElementChild.style.color = '#ddddd9';
         } else if (this.lives === 1) {
@@ -229,7 +245,10 @@ class Player extends Entity {
         } else if (this.lives === 0) {
             UI.stars.firstElementChild.style.color = '#ddddd9';
             //lost game!!
-            UI.loseScreen.style.display = 'flex';
+            window.setTimeout(function () {
+                UI.body.style.backgroundColor = '#9b012d';
+            }, 200);
+            UI.loseScreen.classList.remove('hidden');
         }
     }
 
@@ -420,12 +439,14 @@ document.addEventListener('keyup', function(e) {
  */
 document.querySelector('.winButton').addEventListener('click', function() {
     innit();
-    UI.winScreen.style.display = 'none';
+    UI.body.style.backgroundColor = 'white';
+    UI.winScreen.classList.add('hidden');
 });
 
 document.querySelector('.loseButton').addEventListener('click', function () {
     innit();
-    UI.loseScreen.style.display = 'none';
+    UI.body.style.backgroundColor = 'white';
+    UI.loseScreen.classList.add('hidden');
 });
 
 

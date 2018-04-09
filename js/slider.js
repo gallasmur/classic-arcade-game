@@ -32,6 +32,7 @@ $('.main').on('afterChange', function (event, slick, currentSlide, nextSlide) {
  * When the player has decided which character to choose and click the button, hide the slider and set the sprite
  */
 $('.go').click(function () {
-    $('.character').css('display', 'none');
+    // $('.character').css('display', 'none');
+    $('.character').addClass('hidden');
     player.changeSprite(currentCharSelected);
 });
